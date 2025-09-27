@@ -1,5 +1,9 @@
-// SAMPLE PROBLEMS
+// FREQUENCY COUNTER PATTERN
+// It is mainly used when comparing pieces of data. When comparing values of multiple inputs.
+// This pattern uses objects and sets to collect values from the inputs.
+//  it is always used to avoid need for a Nested loop which results to 0(n^2) operations in Arrays and Strings.
 
+// SAMPLE PROBLEMS
 
 // < =====================EXAMPLE 1 ===================== >
 // Frequency Counter - sameFrequency
@@ -19,40 +23,40 @@
 
 // < =====================SOLUTION 1 ===================== >
 function sameFrequency(num1, num2) {
-    // convert the integers to strings
-    let stringNum1 = num1.toString();
-    let stringNum2 = num2.toString();
+  // convert the integers to strings
+  let stringNum1 = num1.toString();
+  let stringNum2 = num2.toString();
 
-    // check if the strings have the same length
-    if(stringNum1.length !== stringNum2.length) {return false;}
+  // check if the strings have the same length
+  if (stringNum1.length !== stringNum2.length) {
+    return false;
+  }
 
-    // initialize the frequenc counter objects
-    let frequencyCounter1 = {};
-    let frequencyCounter2 = {};
+  // initialize the frequenc counter objects
+  let frequencyCounter1 = {};
+  let frequencyCounter2 = {};
 
-    // populate the frequency counter objects
-    for(let digit of stringNum1) {
-        frequencyCounter1[digit] = (frequencyCounter1[digit] || 0) + 1;
-    }
-    for(let digit of stringNum2) {
-        frequencyCounter2[digit] = (frequencyCounter2[digit] || 0) + 1;
-    }
+  // populate the frequency counter objects
+  for (let digit of stringNum1) {
+    frequencyCounter1[digit] = (frequencyCounter1[digit] || 0) + 1;
+  }
+  for (let digit of stringNum2) {
+    frequencyCounter2[digit] = (frequencyCounter2[digit] || 0) + 1;
+  }
 
-    // compare the two frequency counter objects
-    for(let key in frequencyCounter1) {
-        if(frequencyCounter1[key] !== frequencyCounter2[key]) {
-            return false;
-        }
-
-        if(!(key in frequencyCounter2)) {
-            return false;
-        }
+  // compare the two frequency counter objects
+  for (let key in frequencyCounter1) {
+    if (frequencyCounter1[key] !== frequencyCounter2[key]) {
+      return false;
     }
 
-    return true;
+    if (!(key in frequencyCounter2)) {
+      return false;
+    }
+  }
+
+  return true;
 }
-
-
 
 // < =====================EXAMPLE 2  ===================== >
 
@@ -77,33 +81,35 @@ function sameFrequency(num1, num2) {
 //     constructNote('aabbcc', 'bcabcaddff') // true
 
 function constructNote(message, letters) {
-    // edge case: if message is longer than letters, return false
-    if(message.length > letters.length) {return false;}
+  // edge case: if message is longer than letters, return false
+  if (message.length > letters.length) {
+    return false;
+  }
 
-    // initialize the frequency counter objects
-    let frequencyCounter1 = {};
-    let frequencyCounter2 = {};
-    
-    // populate the frequency counter objects
-    for(let char of message) {
-        frequencyCounter1[char] = (frequencyCounter1[char] || 0) + 1;
-    }
-    for(let char of letters) {
-        frequencyCounter2[char] = (frequencyCounter2[char] || 0) + 1;
-    }
+  // initialize the frequency counter objects
+  let frequencyCounter1 = {};
+  let frequencyCounter2 = {};
 
-    // compare the two frequency counter objects
-    for(let key in frequencyCounter1) {
-        if(frequencyCounter1[key] > frequencyCounter2[key]) {
-            return false;
-        }
+  // populate the frequency counter objects
+  for (let char of message) {
+    frequencyCounter1[char] = (frequencyCounter1[char] || 0) + 1;
+  }
+  for (let char of letters) {
+    frequencyCounter2[char] = (frequencyCounter2[char] || 0) + 1;
+  }
 
-        if(!(key in frequencyCounter2)) {
-            return false;
-        }
+  // compare the two frequency counter objects
+  for (let key in frequencyCounter1) {
+    if (frequencyCounter1[key] > frequencyCounter2[key]) {
+      return false;
     }
 
-    return true;
+    if (!(key in frequencyCounter2)) {
+      return false;
+    }
+  }
+
+  return true;
 }
 
 // < =====================EXAMPLE 3  ===================== >
@@ -115,8 +121,8 @@ function constructNote(message, letters) {
 // Examples:
 
 //     areThereDuplicates(1, 2, 3) // false
-//     areThereDuplicates(1, 2, 2) // true 
-//     areThereDuplicates('a', 'b', 'c', 'a') // true 
+//     areThereDuplicates(1, 2, 2) // true
+//     areThereDuplicates('a', 'b', 'c', 'a') // true
 
 // Restrictions:
 
@@ -131,24 +137,23 @@ function constructNote(message, letters) {
 // Space - O(1)
 
 function areThereDuplicates(...args) {
-    // initialize the frequency counter object
-    let frequencyCounter = {};
+  // initialize the frequency counter object
+  let frequencyCounter = {};
 
-    // populate the frequency counter object
-    for(let arg of args) {
-        frequencyCounter[arg] = (frequencyCounter[arg] || 0) + 1;
+  // populate the frequency counter object
+  for (let arg of args) {
+    frequencyCounter[arg] = (frequencyCounter[arg] || 0) + 1;
+  }
+
+  // check for duplicates
+  for (let key in frequencyCounter) {
+    if (frequencyCounter[key] > 1) {
+      return true;
     }
+  }
 
-    // check for duplicates
-    for(let key in frequencyCounter) {
-        if(frequencyCounter[key] > 1) {
-            return true;
-        }
-    }
-
-    return false;
+  return false;
 }
-
 
 // < =====================EXAMPLE 4  ===================== >
 
@@ -163,20 +168,20 @@ function areThereDuplicates(...args) {
 // Time Complexity - O(n)
 
 function findAllDuplicates(nums) {
-    // initialize the frequency counter object
-    let frequencyCounter = {};
-    let duplicates = [];
+  // initialize the frequency counter object
+  let frequencyCounter = {};
+  let duplicates = [];
 
-    // populate the frequency counter object
-    for(let num of nums) {
-        frequencyCounter[num] = (frequencyCounter[num] || 0) + 1;
+  // populate the frequency counter object
+  for (let num of nums) {
+    frequencyCounter[num] = (frequencyCounter[num] || 0) + 1;
+  }
+
+  // check for duplicates
+  for (let key in frequencyCounter) {
+    if (frequencyCounter[key] > 1) {
+      duplicates.push(Number(key));
     }
-    
-    // check for duplicates
-    for(let key in frequencyCounter) {
-        if(frequencyCounter[key] > 1) {
-            duplicates.push(Number(key));
-        }
-    }
-    return duplicates;
+  }
+  return duplicates;
 }

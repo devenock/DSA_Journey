@@ -1,7 +1,7 @@
 // This is a sorting algorithm where the largest values bubbles up to the top!
 // It involves comparing the items and then swaping based on the value.
 // As we loop through the items, we compare the current item with the next one and if the next item is smaller than the current item, the we do the swapping.
-// Note the before we sort, we must swap
+// Note that before we sort, we must swap
 
 //EXAMPLE
 

@@ -1,7 +1,64 @@
-// <================ Multiple Pointers Pattern ================>
+// <================ Multiple Pointers Pattern (Two Pointers Pattern) ================>
 
-// This pattern uses multiple pointers to create a more efficient algorithm. 
+// This pattern uses multiple pointers to create a more efficient algorithm.
+// The pointers can be moving towards each other or in the same direction to reduce time complexity
+// from 0(n^2) to 0(n).
 // This pattern can often be applied to solve problems with minimal space complexity as well.
+//
+// WHEN TO USE: Problems involving arrays or linked list where you need to find pairs, check palindromes, or work with sorted data.
+
+// SET OF PROBLEMS ON LEETCODE
+// 1. Two Sum II(Easy)
+// Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
+// You may assume that each input would have exactly one solution, and you may not use the same element twice.
+// You can return the answer in any order.
+// Example 1:
+Input: ((nums = [2, 7, 11, 15]), (target = 9));
+Output: [0, 1];
+// Explanation: Because nums[0] + nums[1] == 9, we return [0, 1].
+// Example 2:
+Input: ((nums = [3, 2, 4]), (target = 6));
+Output: [1, 2];
+// Example 3:
+Input: ((nums = [3, 3]), (target = 6));
+Output: [0, 1];
+
+// SOLUTION
+function twoSum(nums, target) {
+  // brute force(nested for loop => 0(n^2))
+  // if(nums.length === 0){
+  //   return 0;
+  // }
+  // for (let i = 0; i < nums.length; i++){
+  //   for (let j = i + 1; j < nums.length; j++){
+  //     if(nums[i] + nums[j] === target){
+  //       return [i, j]
+  //     }
+  //   }
+  // }
+
+  //optimized solution(two pointers => 0(n))
+  // you can decide to sort the arry first if it is not sorted
+  nums.sort((a, b) => a - b);
+  let firstPointer = 0;
+  let lastPointer = nums.length - 1;
+  // use while loop to acertain some condition
+  while (firstPointer < lastPointer) {
+    let sum = nums[firstPointer] + nums[lastPointer];
+    if (sum === target) {
+      return [firstPointer, lastPointer];
+    } else if (sum > target) {
+      lastPointer--;
+    } else {
+      firstPointer++;
+    }
+  }
+}
+
+// 2. Valid Palindrome(Easy)
+// 3. 3Sum(Medium)
+// 4. Container With Most Water(Medium)
+// 5. Trapping Rain Water(Hard)
 
 // < =====================EXAMPLE 1  ===================== >
 
@@ -23,24 +80,22 @@
 // Space: O(1)
 
 function averagePair(arr, targetAvg) {
-    let left = 0;
-    let right = arr.length - 1;
+  let left = 0;
+  let right = arr.length - 1;
 
-    while(left < right) {
-        let avg = (arr[left] + arr[right]) / 2;
-        if(avg === targetAvg) {
-            return true;
-        } else if(avg < targetAvg) {
-            left++;
-        } else {
-            right--;
-        }
+  while (left < right) {
+    let avg = (arr[left] + arr[right]) / 2;
+    if (avg === targetAvg) {
+      return true;
+    } else if (avg < targetAvg) {
+      left++;
+    } else {
+      right--;
     }
+  }
 
-    return false;
+  return false;
 }
-
-
 
 // < =====================EXAMPLE 2  ===================== >
 
@@ -62,23 +117,22 @@ function averagePair(arr, targetAvg) {
 // Space - O(1)
 
 function isSubsequence(str1, str2) {
-    let i = 0;
-    let j = 0;
+  let i = 0;
+  let j = 0;
 
-    if(!str1) return true;
+  if (!str1) return true;
 
-    while(j < str2.length) {
-        if(str2[j] === str1[i]) {
-            i++;
-        }
-        if(i === str1.length) {
-            return true;
-        }
-        j++;
+  while (j < str2.length) {
+    if (str2[j] === str1[i]) {
+      i++;
     }
-    return false;
+    if (i === str1.length) {
+      return true;
+    }
+    j++;
+  }
+  return false;
 }
-
 
 // < =====================EXAMPLE 3  ===================== >
 
@@ -111,34 +165,34 @@ function isSubsequence(str1, str2) {
 // Space Complexity Requirement - O(1)
 
 function findPair(arr, n) {
-    if(arr.length < 2) return false;
-    
-    // Part 1 - Frequency Counter Pattern
-    let frequencyCounter = {};
-    for(let num of arr) {
-        frequencyCounter[num] = (frequencyCounter[num] || 0) + 1;
-    }   
-    for(let num of arr) {
-        if(frequencyCounter[num + n] || (n === 0 && frequencyCounter[num] > 1)) {
-            return true;
-        }
+  if (arr.length < 2) return false;
+
+  // Part 1 - Frequency Counter Pattern
+  let frequencyCounter = {};
+  for (let num of arr) {
+    frequencyCounter[num] = (frequencyCounter[num] || 0) + 1;
+  }
+  for (let num of arr) {
+    if (frequencyCounter[num + n] || (n === 0 && frequencyCounter[num] > 1)) {
+      return true;
     }
-    return false;
+  }
+  return false;
 
-    // Part 2 - Multiple Pointers Pattern             
-    // arr.sort((a, b) => a - b);
-    // let left = 0;
-    // let right = 1;
+  // Part 2 - Multiple Pointers Pattern
+  // arr.sort((a, b) => a - b);
+  // let left = 0;
+  // let right = 1;
 
-    // while(right < arr.length) {
-    //     let diff = arr[right] - arr[left];
-    //     if(diff === n && left !== right) {
-    //         return true;
-    //     } else if(diff < n) {
-    //         right++;
-    //     } else {
-    //         left++;
-    //     }
-    // }
-    // return false;
+  // while(right < arr.length) {
+  //     let diff = arr[right] - arr[left];
+  //     if(diff === n && left !== right) {
+  //         return true;
+  //     } else if(diff < n) {
+  //         right++;
+  //     } else {
+  //         left++;
+  //     }
+  // }
+  // return false;
 }

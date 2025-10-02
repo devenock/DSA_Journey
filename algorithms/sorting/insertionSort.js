@@ -6,17 +6,16 @@
 // (i.e. the left side) to place the element in the correct place.
 // 4. Repeat until the array is sorted.
 //
-
+//
+//
 function insertionSort(arr) {
-  for (let i = 0; i < arr.length; i++) {
-    for (let j = i + 1; j < arr.length; j++) {
-      let tempVal = arr[j];
-      if (tempVal < arr[i]) {
-        // swap
-        let temp = arr[j];
-        arr[j] = arr[i];
-        arr[i] = temp;
-      }
+  var currentVal;
+  for (var i = 1; i < arr.length; i++) {
+    currentVal = arr[i];
+    for (var j = i - 1; j >= 0 && arr[j] > currentVal; j--) {
+      arr[j + 1] = arr[j];
     }
+    arr[j + 1] = currentVal;
   }
+  return arr;
 }

@@ -5,6 +5,59 @@
 
 // SAMPLE PROBLEMS
 
+// < =====================EXAMPLE 0 ===================== >
+// Frequency Counter - same
+// Write a function called **same**, which accepts two arrays. The function should return true if every value in the array has it's corresponding
+// value squared in the second array. The frequency of the values must be the same.
+
+// BRUTE FORCE SOLUTION
+function same(arr1, arr2) {
+  // check the length of the two arrays to ensure they are of the same length
+  if (arr1.length !== arr2.length) {
+    return false;
+  }
+  // loop through the first array
+  for (let i = 0; i < arr1.length; i++) {
+    // define the index of arr1^2 in arr2
+    let correctIndex = arr2.indexOf(arr1[i] ** 2);
+    // check if they truly exist
+    if (correctIndex === -1) {
+      return false;
+    }
+    arr2.splice(correctIndex, 1);
+  }
+  return true;
+}
+
+// OPTIMIZED SOLUTION
+function same2(arr1, arr2) {
+  // compare array lengths
+  if (arr1.length !== arr2.length) {
+    return false;
+  }
+  // define the frequencies
+  let frequency1 = {};
+  let frequency2 = {};
+
+  // loop through the first array
+  for (let val of arr1) {
+    frequency1[val] = (frequency1[val] || 0) + 1;
+  }
+
+  // loop through the second array
+  for (let val of arr2) {
+    frequency2[val] = (frequency2[val] || 0) + 1;
+  }
+
+  // loop through the first frquency
+  for (let key in frequency1) {
+    if (!(key ** 2 in frequency2)) {
+      return false;
+    }
+  }
+  return true;
+}
+
 // < =====================EXAMPLE 1 ===================== >
 // Frequency Counter - sameFrequency
 
@@ -184,4 +237,100 @@ function findAllDuplicates(nums) {
     }
   }
   return duplicates;
+}
+
+// <===============Example 5=============>
+// Anagram challenge
+
+// Frequency Counter - validAnagram
+
+// Given two strings, write a function to determine if the second string is an anagram of the first.
+// An anagram is a word, phrase, or name formed by rearranging the letters of another, such as cinema, formed from iceman.
+
+// Examples:
+validAnagram("", ""); // true
+validAnagram("aaz", "zza"); // false
+validAnagram("anagram", "nagaram"); // true
+validAnagram("rat", "car"); // false) // false
+validAnagram("awesome", "awesom"); // false
+validAnagram("amanaplanacanalpanama", "acanalmanplanpamana"); // false
+validAnagram("qwerty", "qeywrt"); // true
+validAnagram("texttwisttime", "timetwisttext"); // true
+
+// Note: You may assume the string contains only lowercase alphabets.
+// Time Complexity - O(n)
+
+// BRUTE FORCE
+function bruteValidAnagram(str1, str2) {
+  if (str1.length !== str2.length) {
+    return false;
+  }
+
+  // loop through the strings to check if they have similar items
+  for (let i = 0; i < str1.length; i++) {
+    let correctIndex = str2.indexOf(str1[i]);
+    if (correctIndex === -1) {
+      return false;
+    }
+    str2.splice(correctIndex, 1);
+  }
+  return true;
+}
+
+// OPTIMIZED SOLUTION
+function optimizedValidAnagram(string1, string2) {
+  // compare their length
+  if (string1.length !== string2.length) {
+    return false;
+  }
+
+  // define he hash maps for the frequencies
+  let frequencyCounter1 = {};
+  let frequencyCounter2 = {};
+
+  // loop through the first string and assign its values to the fruency
+  for (let val of string1) {
+    frequencyCounter1[val] = (frequencyCounter1[val] || 0) + 1;
+  }
+
+  // loop through the second string and assign its values to the fruency
+  for (let val of string2) {
+    frequencyCounter2[val] = (frequencyCounter2[val] || 0) + 1;
+  }
+
+  for (let key in frequencyCounter1) {
+    if ((!key) in frequencyCounter2) {
+      return false;
+    }
+  }
+  return true;
+}
+
+// Unique Number of Occurrences
+// Given an array of integers **arr**, return **true** if the number of occurrences of each value in the array is **unique** or **false** otherwise.
+// Example 1:
+// Input: arr = [1,2,2,1,1,3]
+// Output: true
+// Explanation: The value 1 has 3 occurrences, 2 has 2 and 3 has 1. No two values have the same number of occurrences.
+// Example 2:
+// Input: arr = [1,2]
+// Output: false
+// Example 3:
+// Input: arr = [-3,0,1,-3,1,1,1,-3,10,0]
+// Output: true
+// Constraints:
+//     1 <= arr.length <= 1000
+//     -1000 <= arr[i] <= 1000
+
+// BRUTE FORCE
+function numberOfOccurances(arr) {
+  return arr.length === 0 ? false : true;
+  // loop through the array
+  for (let i = 0; i < arr.length; i++) {
+    for (let j = i + 1; j < arr.length; j++) {
+      if (arr[i] !== arr[j]) {
+        return false;
+      }
+    }
+  }
 }

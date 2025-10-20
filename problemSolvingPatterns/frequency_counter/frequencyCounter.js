@@ -115,7 +115,8 @@ function sameFrequency(num1, num2) {
 
 // Frequency Counter - constructNote
 
-// Write a function called constructNote, which accepts two strings, a message and some letters. The function should return true if the message can be built with the letters that you are given, or it should return false.
+// Write a function called constructNote, which accepts two strings, a message and some letters.
+// The function should return true if the message can be built with the letters that you are given, or it should return false.
 
 // Assume that there are only lowercase letters and no space or special characters in both the message and the letters.
 
@@ -169,7 +170,9 @@ function constructNote(message, letters) {
 
 // Frequency Counter / Multiple Pointers - areThereDuplicates
 
-// Implement a function called, areThereDuplicates which accepts a variable number of arguments, and checks whether there are any duplicates among the arguments passed in.  You can solve this using the frequency counter pattern OR the multiple pointers pattern.
+// Implement a function called, areThereDuplicates which accepts a variable number of arguments,
+// and checks whether there are any duplicates among the arguments passed in.
+// You can solve this using the frequency counter pattern OR the multiple pointers pattern.
 
 // Examples:
 
@@ -212,7 +215,8 @@ function areThereDuplicates(...args) {
 
 // Frequency Counter - findAllDuplicates
 
-// Given an array of positive integers, some elements appear twice and others appear once. Find all the elements that appear twice in this array. Note that you can return the elements in any order.
+// Given an array of positive integers, some elements appear twice and others appear once.
+// Find all the elements that appear twice in this array. Note that you can return the elements in any order.
 
 //     findAllDuplicates([4,3,2,7,8,2,3,1]) // array with 2 and 3
 //     findAllDuplicates([4, 3, 2, 1, 0]) // []
@@ -284,16 +288,16 @@ function optimizedValidAnagram(string1, string2) {
     return false;
   }
 
-  // define he hash maps for the frequencies
+  // define the hash maps for the frequencies
   let frequencyCounter1 = {};
   let frequencyCounter2 = {};
 
-  // loop through the first string and assign its values to the fruency
+  // loop through the first string and assign its values to the frequency
   for (let val of string1) {
     frequencyCounter1[val] = (frequencyCounter1[val] || 0) + 1;
   }
 
-  // loop through the second string and assign its values to the fruency
+  // loop through the second string and assign its values to the frequency
   for (let val of string2) {
     frequencyCounter2[val] = (frequencyCounter2[val] || 0) + 1;
   }

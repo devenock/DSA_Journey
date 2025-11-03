@@ -9,7 +9,7 @@
 
 // SET OF PROBLEMS ON LEETCODE
 // 1. Two Sum II(Easy)
-// Given a 1-indexed array of integers numbers that is already sorted in non-decreasing order,
+// Given a 1-indexed array of integer numbers that is already sorted in non-decreasing order,
 // find two numbers such that they add up to a specific target number. Let these two numbers be
 // numbers[index1] and numbers[index2] where 1 <= index1 < index2 <= numbers.length.
 // Return the indices of the two numbers, index1 and index2, added by one as an integer array [index1, index2] of length 2.
@@ -67,7 +67,9 @@ function twoSumII(nums, target) {
 
 // averagePair
 
-// Write a function called averagePair. Given a sorted array of integers and a target average, determine if there is a pair of values in the array where the average of the pair equals the target average. There may be more than one pair that matches the average target.
+// Write a function called averagePair. Given a sorted array of integers and a target average,
+// determine if there is a pair of values in the array where the average of the pair equals the target average.
+// There may be more than one pair that matches the average target.
 
 // Examples:
 
@@ -104,7 +106,10 @@ function averagePair(arr, targetAvg) {
 
 // Frequency Counter / Multiple Pointers - isSubsequence
 
-// Write a function called isSubsequence which takes in two strings and checks whether the characters in the first string form a subsequence of the characters in the second string. In other words, the function should check whether the characters in the first string appear somewhere in the second string, without their order changing.
+// Write a function called isSubsequence which takes in two strings and checks
+// whether the characters in the first string form a subsequence of the characters
+// in the second string. In other words, the function should check whether the characters
+// in the first string appear somewhere in the second string, without their order changing.
 
 // Examples:
 

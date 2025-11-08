@@ -128,10 +128,76 @@ class SinglyLinkedList {
     }
     return current;
   }
-  // SET:
-  // INSERT:
-  // REMOVE:
-  // REVERSE:
+  // SET:Changing the vale of a node based on it's position in the linked list.
+  // PSEUDOCODE
+  // 1. This function should accept a value and an index.
+  // 2. Use your get function to find the specific node.
+  // 3. If the node is not found, return false
+  // 4. If the node is found, set the value of that node to be the value passed to the function and return true.
+  set(value, index) {
+    let nodeVal = this.get(index);
+    if (!nodeVal) {
+      return false;
+    } else {
+      nodeVal.value = value;
+      return true;
+    }
+  }
+  // INSERT:Adding a node to the linked list at a specific index/position.
+  // PSEUDOCODE
+  // 0. Create a new node
+  // 1. If the index is less than zero or greater than the length, return false.
+  // 2. If the index is same as the length, push a new node to the end of the list.
+  // 3. If the index is 0, unshift a new node to the start of the list.
+  // 4. Otherwise, using the get method, access the node at the index - 1.
+  // 5. Set the next property on that node to be the new node.
+  // 6. Set the next property on the new node to be the previous next.
+  // 7. Increment the length.
+  // 8. Return true.
+  insert(val, index) {
+    let newNode = new Node(val);
+    if (index < 0 || index > this.length) {
+      return false;
+    }
+
+    if (index === this.length) {
+      this.push(val);
+      return true;
+    }
+
+    if (index === 0) {
+      this.unshift(val);
+      return true;
+    }
+    let prev = this.get(index - 1);
+    let temp = prev.next;
+    prev.next = newNode;
+    newNode.next = temp;
+    this.length++;
+    return true;
+  }
+  // REMOVE: Removing a node from the Linked List at a specific position. It takes an index as an argument.
+  // PSEUDOCODE
+  // 1. If the index is less than zero or greater than the length, return undefined.
+  // 2. If the index is the same as the length - 1, pop
+  // 3. If the index is 0, shift
+  // 4. Otherwise, using the get method, access the node at the index - 1;
+  // 5. Set the next property on that node to be the next of the next node
+  // 6. Decrement the length
+  // 7. Return the value of the node removed.
+  remove(index) {
+    if (index < 0 || index >= this.length) return undefined;
+    if (index === 0) return this.shift();
+    if (index === this.length - 1) return this.pop();
+    let previousNode = this.get(index - 1);
+    let removed = previousNode.next;
+    previousNode.next = removed.next;
+    this.length--;
+    return removed;
+  }
+  // REVERSE:Reversing the linked list in place!
+  // PSEUDOCODE
+  // 1.
 }
 
 // define an instance of the singly linked list to use it

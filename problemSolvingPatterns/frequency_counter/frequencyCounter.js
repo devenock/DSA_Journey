@@ -5,14 +5,14 @@
 
 // SAMPLE PROBLEMS
 
-// < =====================EXAMPLE 0 ===================== >
+// < ===================== EXAMPLE 0 ===================== >
 // Frequency Counter - same
 // Write a function called **same**, which accepts two arrays. The function should return true if every value in the array has it's corresponding
 // value squared in the second array. The frequency of the values must be the same.
 
 // BRUTE FORCE SOLUTION
 function same(arr1, arr2) {
-  // check the length of the two arrays to ensure they are of the same length
+  // check to ensure they are of the same length
   if (arr1.length !== arr2.length) {
     return false;
   }

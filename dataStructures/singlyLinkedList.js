@@ -1,6 +1,6 @@
 // What is a linked list?
 // A data structure that contains a head, tail and length property.
-// Linked Lists consiste of nodes, and each node has a value and a pointer to another node or null.
+// Linked Lists consist of nodes, and each node has a value and a pointer to another node or null.
 // It is simply a collection of nodes which can not be accessed randomly via indices since they are not indexed.
 // Mainly useful when dealing with large data sets
 
@@ -13,7 +13,6 @@ class Node {
   }
 }
 
-// now let us create the singlylinkedlist class
 // this class has head, tail and length
 // head is null since we do not have any node yet
 // tail is also null
@@ -26,7 +25,7 @@ class SinglyLinkedList {
   }
   // we define methods to manipulate the Linked List Class here
   // PUSH: adding to the end of the linked list
-  // PUSHING PSEUDOCODE
+  // PSEUDOCODE
   // 1. This function should accept a value
   // 2. Create a new node using the value passed to the function
   // 3. If there is no head property on the list, set the head and the tail to be the newly created node.

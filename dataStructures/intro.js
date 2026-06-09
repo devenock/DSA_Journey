@@ -10,3 +10,7 @@ class DataStructure {
     // what should each object created from this class be able to do?
   }
 }
+
+
+// Object Prototypes
+// Protoß

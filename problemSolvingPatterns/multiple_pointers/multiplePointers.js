@@ -115,7 +115,6 @@ function containerWithMostWater(height) {
   if (height.length === 0) {
     return -1;
   }
-
   // define the pointers
   let left = 0
   let right = height.length - 1
@@ -125,6 +124,11 @@ function containerWithMostWater(height) {
     let width = right - left
     let area = width * height;
     result = Math.max(result, area)
+    if (height[left] <= height[right]) {
+      left++
+    } else {
+      right--
+    }
   }
 
   return result;

@@ -1,6 +1,8 @@
+// Sliding window can be fixed length or variable length.
+// FIXED-LENGTH SLIDING WINDOW: Used when you know the length of the subarray/substring you are looking for.
 // WHEN TO USE: Problems involving subarrays/substrings with specific conditions, finding optimal windows.
-// KEY INSIGHT: Maintain a window and expand/ contract t based on conditions to avoid recalculating.
-//
+// KEY INSIGHT: Maintain a window and expand/contract based on conditions to avoid recalculating.
+
 // LEETCODE PROBLEM SET
 // 1. Maximum Average Subarray I (Easy - #643)
 // 2. Best Time to Buy and Sell Stock (Easy - #121)
@@ -22,7 +24,7 @@
 
 // Constraints:
 
-// Time Complexity - O(N)
+// Time Complexity - O(n)
 
 // Space Complexity - O(1)
 
@@ -32,7 +34,7 @@ function maxSubarraySum(arr, num) {
   let maxSum = 0;
   let tempSum = 0;
 
-  // find the initial window sum
+  // find the initial window sum by limiting to just "num" items
   for (let i = 0; i < num; i++) {
     maxSum += arr[i];
   }

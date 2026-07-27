@@ -4,7 +4,6 @@
 // The pointers can be moving towards each other or in the same direction to reduce time complexity
 // from 0(n^2) to 0(n).
 // This pattern can often be applied to solve problems with minimal space complexity as well.
-//
 // WHEN TO USE: Problems involving arrays or linked list where you need to find pairs, check palindromes, or work with sorted data.
 
 // SET OF PROBLEMS ON LEETCODE
@@ -59,8 +58,78 @@ function twoSumII(nums, target) {
 }
 
 // 2. Valid Palindrome(Easy)
+// Given a string s, return true if it is a palindrome, otherwise return false.
+// A palindrome is a string that reads the same forward and backward. It is also case-insensitive and ignores all non-alphanumeric characters.
+// Note: Alphanumeric characters consist of letters (A-Z, a-z) and numbers (0-9).
+// Example 1:
+// Input: s = "Was it a car or a cat I saw?"
+// Output: true
+// Explanation: After considering only alphanumerical characters we have "wasitacaroracatisaw", which is a palindrome.
+// Example 2:
+// Input: s = "tab a cat"
+// Output: false
+// SOLUTION
+function isPalindrome(s) {
+  // first change the string to lowercase, then remove the spaces and the special x-ters from the string(trim it)
+  let newStr = s.toLowerCase().replace(/[^a-z0-9]/g,"")
+  // form an array from the string
+  let sArr = newStr.split("")
+
+  // check if length is 0 and return true because an empty string is a valid palindrome
+  if (sArr.length === 0) {
+    return true;
+  }
+  // define the pointers
+  let left = 0
+  let right = sArr.length - 1
+  // set the loop
+  while (left < right) {
+    if (sArr[left] !== sArr[right]) {
+      return false
+    } else {
+      left++
+      right--
+    }
+  }
+
+  return true;
+}
 // 3. 3Sum(Medium)
+
 // 4. Container With Most Water(Medium)
+// You are given an integer array height of length n. There are n vertical lines drawn such that the two endpoints of the ith line are (i, 0) and (i, height[i]).
+// Find two lines that together with the x-axis form a container, such that the container contains the most water.
+// Return the maximum amount of water a container can store.
+//    Example 1:
+//   Input: height = [1,8,6,2,5,4,8,3,7]
+//   Output: 49
+//   Explanation: The above vertical lines are represented by array [1,8,6,2,5,4,8,3,7]. In this case,
+//   the max area of water (blue section) the container can contain is 49.
+//   Example 2:
+
+//   Input: height = [1,1]
+//   Output: 1
+// SOLUTION:
+function containerWithMostWater(height) {
+  // first check the array length
+  if (height.length === 0) {
+    return -1;
+  }
+
+  // define the pointers
+  let left = 0
+  let right = height.length - 1
+  let height = Math.min(height[left], height[right])
+  let result = 0
+  while (left < right) {
+    let width = right - left
+    let area = width * height;
+    result = Math.max(result, area)
+  }
+
+  return result;
+}
+
 // 5. Trapping Rain Water(Hard)
 
 // < =====================EXAMPLE 1  ===================== >

@@ -6,7 +6,7 @@
 //EXAMPLE
 
 function bubbleSort(arr) {
-  // define a variable to help ypu break out of the loop when there is no more swapping
+  // define a variable to help you break out of the loop when there is no more swapping
   let noSwaps;
   // start looping from the end of array towards the beginning
   for (let i = arr.length; i > 0; i--) {

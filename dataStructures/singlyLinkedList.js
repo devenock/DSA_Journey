@@ -3,6 +3,8 @@
 // Linked Lists consist of nodes, and each node has a value and a pointer to another node or null.
 // It is simply a collection of nodes which can not be accessed randomly via indices since they are not indexed.
 // Mainly useful when dealing with large data sets
+// A linked list allows for efficient insertion and deletion operation compared to arrays and is also used to implement other
+// data structures(queue, stack and dequeue)
 
 // start by creating a Node class
 // For this first Node class, we are taking its value and then we are setting next pointer to null since we are talking of just a single node
@@ -34,14 +36,14 @@ class SinglyLinkedList {
   // 6. Return the list
   push(val) {
     let newNode = new Node(val);
-    if (this.head === null) {
+    if (!this.head) {
       this.head = newNode;
       this.tail = newNode; //this.tail = this.head(same thing)
     } else {
       this.tail.next = newNode;
       this.tail = newNode;
     }
-    this.length += 1;
+    this.length++;
     return this;
   }
 

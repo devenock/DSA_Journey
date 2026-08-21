@@ -10,8 +10,7 @@ class Node{
   }
 }
 
-// create a linkedlist class(has got head, tail and length)
-// head and tail are initialised as null since we are starting from scratch and the length is also 0
+// linkedlist class(initialize head and tail to null for an empty list and the length to zero)
 class SinglyLinkedList{
   constructor() {
     this.head = null
@@ -21,9 +20,8 @@ class SinglyLinkedList{
 
   // methods
   push(val) {
-    // create a new node based on the Node class
+    // create a new node instance
     let newNode = new Node(val)
-    // check if this is an empty list or it has nodes
     if (!this.head) {
       this.head = newNode
       this.tail = newNode
@@ -36,25 +34,24 @@ class SinglyLinkedList{
   }
 
   pop() {
-    // first check if we have nodes in the list
+    // first check if the list is empty
     if (!this.head) {
-      return undefined;
+      return undefined
     }
 
-    // initialize the current node to the head
-    let current = this.head
-    // declare the newTail as the next node since we are traversing the list
-    let newTail = current
+    // get the current head and the new tail
+    let currentHead = this.head
+    let newTail = currentHead
 
-    // set condition
-    while (current.next) {
-      newTail = current
-      current = current.next
+    // se the looping condition
+    while (currentHead.next) {
+      newTail = currentHead
+      currentHead = currentHead.next
     }
-    this.tail.next = null
     this.tail = newTail
+    this.tail.next = null
     this.length--
-    return current;
+    return currentHead;
   }
 
   shift() {
@@ -63,11 +60,12 @@ class SinglyLinkedList{
     }
     let current = this.head
     this.head = current.next
-    this.length--
+    this.length--;
     return current;
   }
 
   unshift(val) {
+    // create a node
     let newNode = new Node(val)
     if (!this.head) {
       this.head = newNode
@@ -76,34 +74,81 @@ class SinglyLinkedList{
       newNode.next = this.head
       this.head = newNode
     }
-
     this.length++
     return this;
   }
 
   get(pos) {
     if (pos < 0 || pos >= this.length) {
-      return null
+      return false
     }
 
-    // declare the current pos
-    let cPos = this.head
-    let defaultPos = 0
-
-    // check to see that the default position is not equal to the pos
-    while (defaultPos !== pos) {
-      cPos = cPos.next
-      defaultPos++
+    let count = 0
+    let current = this.head
+    while (pos !== count) {
+      current = current.next
+      count++
     }
-    return cPos;
+    return current;
   }
 
   set(pos, val) {
-    let rightPos = this.get(pos)
-    if (rightPos) {
-      rightPos.val = val
-      return true;
+    if (pos < 0 || pos >= this.length) {
+      return false
     }
-    return false;
+    let val = this.get(val)
+    if (!val) {
+      return false
+    } else {
+      val.val = val
+      return true
+    }
+  }
+
+  insert(index, val) {
+    if (index < 0 || index > this.length) {
+      return false;
+    }
+    let newNode = new Node(val)
+    // check if index is either the first or the last
+    if (index === 0) {
+      this.unshift(val)
+      return true
+    }
+
+    if (index === this.length) {
+      this.push(val)
+      return true
+    }
+
+    // get the previous node
+    let prevNode = this.get(index - 1)
+
+    // get the  prevNode next
+    let temp = prevNode.next
+    prevNode.next = newNode
+    newNode.next = temp
+    this.length++
+    return true;
+  }
+
+  remove(index) {
+    if (index < 0 || index >= this.length - 1) {
+      return undefined
+    }
+
+    if (index === 0) {
+      this.shift()
+    }
+
+    if (index === this.length - 1) {
+      this.pop()
+    }
+
+    let prev = this.get(index - 1)
+    let toBeRemoved = prev.next
+    prev.next = toBeRemoved.next
+    this.length--
+    return toBeRemoved;
   }
 }

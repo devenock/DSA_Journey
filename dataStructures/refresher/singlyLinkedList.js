@@ -1,8 +1,5 @@
-// data is stored in nodes and nodes link to each other with a distinct head and tail
-// The nodes are connected via pointers and the tail always has a null pointer
-// to create a linkedlist, we need to use the class keyword to define the Node and the LinkedList classes
-
-// creating a node(has value/data and a pointer to the next node)
+// a linkedlist stores data in nodes and each node has a value and a pointer reference to the next node.
+// create a node class
 class Node{
   constructor(val) {
     this.val = val
@@ -10,7 +7,7 @@ class Node{
   }
 }
 
-// linkedlist class(initialize head and tail to null for an empty list and the length to zero)
+// create a linkedlist class with head, tail inititalised to null and the lenfgth initialized to zero
 class SinglyLinkedList{
   constructor() {
     this.head = null
@@ -18,10 +15,11 @@ class SinglyLinkedList{
     this.length = 0
   }
 
-  // methods
+  // push
   push(val) {
-    // create a new node instance
+    // create a new node
     let newNode = new Node(val)
+    // check if the list is empt of has nodes
     if (!this.head) {
       this.head = newNode
       this.tail = newNode
@@ -33,122 +31,117 @@ class SinglyLinkedList{
     return this;
   }
 
+
+  // pop
   pop() {
-    // first check if the list is empty
-    if (!this.head) {
-      return undefined
-    }
-
-    // get the current head and the new tail
-    let currentHead = this.head
-    let newTail = currentHead
-
-    // se the looping condition
-    while (currentHead.next) {
-      newTail = currentHead
-      currentHead = currentHead.next
-    }
-    this.tail = newTail
-    this.tail.next = null
-    this.length--
-    return currentHead;
-  }
-
-  shift() {
+    // first check if the list has nodes or if it is empty
     if (!this.head) {
       return undefined;
     }
     let current = this.head
+    let newTail = current
+
+    while (current.next) {
+      newTail = current
+      current = current.next
+    }
+    this.tail = newTail
+    this.tail.next = null
+    this.length--
+    return current;
+  }
+
+  // shift
+  shift() {
+    if (!this.head) {
+      return undefined
+    }
+    let current = this.head
     this.head = current.next
-    this.length--;
+    this.length--
     return current;
   }
 
   unshift(val) {
-    // create a node
     let newNode = new Node(val)
     if (!this.head) {
       this.head = newNode
       this.tail = newNode
     } else {
-      newNode.next = this.head
       this.head = newNode
+      newNode.next = this.head
     }
     this.length++
     return this;
   }
 
-  get(pos) {
-    if (pos < 0 || pos >= this.length) {
-      return false
+  get(index) {
+    if (index < 0 || index >= this.length) {
+      return null
     }
 
     let count = 0
     let current = this.head
-    while (pos !== count) {
+    while (index !== count) {
       current = current.next
       count++
     }
     return current;
   }
 
-  set(pos, val) {
-    if (pos < 0 || pos >= this.length) {
-      return false
-    }
-    let val = this.get(val)
+  set(index, value) {
+    let val = this.get(index)
     if (!val) {
       return false
     } else {
-      val.val = val
+      val.value = value
       return true
     }
   }
 
-  insert(index, val) {
-    if (index < 0 || index > this.length) {
-      return false;
+  insert(val, pos) {
+    let newNode = newNode(val)
+
+    if (!this.head) {
+      this.head = newNode
+      this.tail = newNode
     }
-    let newNode = new Node(val)
-    // check if index is either the first or the last
-    if (index === 0) {
+
+    if (pos === 0) {
       this.unshift(val)
       return true
     }
 
-    if (index === this.length) {
+    if (pos === this.length) {
       this.push(val)
       return true
     }
 
-    // get the previous node
-    let prevNode = this.get(index - 1)
-
-    // get the  prevNode next
-    let temp = prevNode.next
-    prevNode.next = newNode
+    let prev = this.get(pos - 1)
+    let temp = prev.next
+    prev.next = newNode
     newNode.next = temp
-    this.length++
     return true;
   }
 
-  remove(index) {
-    if (index < 0 || index >= this.length - 1) {
-      return undefined
+  remove(pos) {
+    if (pos < 0 || pos >= this.length) {
+      return undefined;
     }
 
-    if (index === 0) {
+    if (pos === 0) {
       this.shift()
+      return true
     }
 
-    if (index === this.length - 1) {
+    if (pos === this.length - 1) {
       this.pop()
+      return true
     }
-
-    let prev = this.get(index - 1)
-    let toBeRemoved = prev.next
-    prev.next = toBeRemoved.next
-    this.length--
-    return toBeRemoved;
+    let prev = this.get(pos - 1)
+    let removed = prev.next
+    prev.next = removed.next
+    return removed;
   }
+
 }

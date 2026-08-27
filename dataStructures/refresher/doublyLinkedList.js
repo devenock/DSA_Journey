@@ -1,6 +1,7 @@
-// doubly linkedlist is similar to a singly linkedlist in many ways only that it has a pointer reference to the previous Node.
-// creating a node class for a doubly linkedlist looks like
+// ## Doubly Linked list is different from a singly linkedlist because it has both the next and prev pointer references
+// The node has a prev pointer which points to the previous pointer and a next pointer
 
+// create a node class
 class Node{
   constructor(val) {
     this.val = val
@@ -17,9 +18,13 @@ class DoublyLinkedList{
     this.length = 0
   }
 
-  // linked list methods
+  // linkedlist methods
+  // push: add a node at the end of the list
   push(val) {
+    // first create a new node using the val
     let newNode = new Node(val)
+
+    // check to see if there is any node in the list or not before setting head and tail
     if (!this.head) {
       this.head = newNode
       this.tail = newNode
@@ -32,31 +37,38 @@ class DoublyLinkedList{
     return this;
   }
 
+  // pop: remove a node from the end of the list
   pop() {
+    // first check to see if there is anything to remove
     if (!this.head) {
-      return undefined
+      return undefined;
     }
-
+    // get the item to be removed
     let removedTail = this.tail
-
-    if (this.length === 1) {
+    // if only one node exist, set head and tail to null
+    if (this.length == 1) {
       this.head = null
       this.tail = null
     } else {
       this.tail = removedTail.prev
-      this.tail.next = null
       removedTail.prev = null
+      this.tail.next = null
     }
+
     this.length--
-    return removedTail
+    return removedTail;
   }
 
+  // shift: remove the first node in the list
   shift() {
     if (!this.head) {
       return undefined;
     }
+
     let currentHead = this.head
-    if (this.length === 1) {
+
+    // check length
+    if (this.length == 1) {
       this.head = null
       this.tail = null
     } else {
@@ -64,45 +76,53 @@ class DoublyLinkedList{
       this.head.prev = null
       currentHead.next = null
     }
+
     this.length--
     return currentHead;
   }
 
+  // unshift:add to the start of the list
   unshift(val) {
     let newNode = new Node(val)
 
     if (!this.head) {
-      this.head = newNode
-      this.tail = newNode
+      this.head = null
+      this.tail = null
     } else {
-      this.head.prev = newNode
       newNode.next = this.head
+      this.head.prev = newNode
       this.head = newNode
     }
     this.length++
     return this;
   }
 
+  // get: find a node by index/position in a list
   get(index) {
     if (index < 0 || index >= this.length) {
-      return null;
+      return null
     }
 
     let currentHead = this.head
-    let count = 0
-    while (index !== count) {
+    let counter = 0
+
+    while (index != counter) {
       currentHead = currentHead.next
-      count++
+      counter++
     }
     return currentHead;
   }
 
+  // set: changing the value of a node using their index
   set(val, index) {
-    let newVal = this.get(index)
-    if (!newVal) {
-      return false;
+    let changedNode = this.get(index)
+    if (changedNode != null) {
+      changedNode.val = val
+      return true
     }
-    newVal.val = val
-    return true;
+    return false;
   }
+
+  // insert
+  // remove
 }

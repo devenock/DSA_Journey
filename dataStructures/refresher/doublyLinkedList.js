@@ -124,5 +124,54 @@ class DoublyLinkedList{
   }
 
   // insert
+  insert(val, index) {
+    if (index < 0 || index >= this.length) {
+      return false;
+    }
+
+    let newNode = new Node(val)
+
+    if (index === 0) {
+      this.unshift(val)
+      return true
+    }
+
+    if (index === this.length) {
+      return this.push(val)
+    }
+
+    let prevNode = this.get(index - 1)
+    let nextNode = prevNode.next
+    prevNode.next = newNode
+    newNode.next = nextNode
+    afterNode.prev = newNode
+    newNode.prev = prevNode
+    this.length++
+    return true;
+  }
+
   // remove
+  remove(index) {
+    if (index < 0 || index >= this.length) {
+      return undefined
+    }
+
+    if (index === 0) {
+      return this.shift()
+    }
+
+    if (index >= this.length -1) {
+      return this.pop()
+    }
+
+    let removedNode = this.get(index)
+    let prevNode = this.get(index - 1)
+    let afterNode = removedNode.next
+    prevNode.next = afterNode
+    afterNode.prev = prevNode
+    removedNode.prev = null
+    removedNode.next = null
+    this.length--
+    return removedNode;
+  }
 }

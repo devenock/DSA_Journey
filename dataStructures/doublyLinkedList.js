@@ -163,11 +163,11 @@ class DoublyLinkedList{
     }
 
     if (index === 0) {
-      this.unshift(val)
+      return this.unshift(val)
     }
 
     if (index === this.length - 1) {
-      this.push(val)
+      return this.push(val)
     }
 
     let newNode = new Node(val)

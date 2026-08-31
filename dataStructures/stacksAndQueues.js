@@ -60,3 +60,78 @@
 // Disadvantages
 // 1. Limited Access: Elements in a stack can only be accessed from the top  which makes it difficult to retrieve or modify elements in the middle.
 // 2. Potential for overflow: Pushing more elements onto a stack than it can hold results in an overflow error, leading to data loss.
+
+// Array Implementation
+// - It is not a common way of implementing a Stack.
+// - It is recommended to use either push or pop when implementing a Stack using an array because they do not require re-indexing of the array
+// unlike shift and unshift.
+// By using push and pop, we treat the end of the array as the top of the stack.
+
+// LinkedList Implementation
+
+// STACK CODE SOLUTION
+
+// create a node class
+class Node {
+  constructor(val) {
+    this.val = val;
+    this.next = null;
+  }
+}
+
+class Stack {
+  constructor() {
+    this.first = null;
+    this.last = null;
+    this.size = 0;
+  }
+
+  // stack methods
+  // PUSH: O(1)
+  // PSEUDOCODE
+  // 1. The function should accept a value
+  // 2. Create a new node with that value
+  // 3. If there are no nodes in the stack, set the first and the last property to be the newly created node.
+  // 4. If there is at least one node, create a variable that stores the current first property on the stack.
+  // 5. Reset the first property to be the newly created node
+  // 6. Set the next property on the node to be the previously created variable
+  // 7. Increament the size of the stack by 1
+  push(val) {
+    let newNode = new Node(val);
+    if (!this.first) {
+      this.first = newNode;
+      this.last = newNode;
+    } else {
+      let firstNode = this.first;
+      this.first = newNode;
+      newNode.next = firstNode;
+    }
+    return this.size++;
+  }
+
+  // POP: O(1)
+  // PSEUDOCODE
+  // 1. if there are no nodes in the stack, return null
+  // 2. Create a temporary variable to store the first property on the stack
+  // 3. If there is only 1 node, set the first and the last property to be null
+  // 4. If there is more than one node, set the first property to be the next property in the current first
+  // 5. Decrement the size by 1
+  // 6. Return the value of the node removed.
+  pop() {
+    if (!this.first) {
+      return null;
+    }
+
+    let currentFirst = this.first;
+
+    if (this.first === this.last) {
+      this.last = null;
+    }
+    this.first = this.first.next;
+    this.size--;
+    return currentFirst.value;
+  }
+
+  // Searching: O(n)
+  // Access: O(n)
+}

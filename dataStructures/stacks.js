@@ -132,6 +132,9 @@ class Stack {
     return currentFirst.value;
   }
 
+  // BIG O NOTATIONS
   // Searching: O(n)
   // Access: O(n)
+  // Insertion: O(1)
+  // Deletion: O(1)
 }

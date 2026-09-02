@@ -83,9 +83,7 @@ class Queue {
       this.last.next = newNode;
       this.last = newNode;
     }
-    this.size++;
-    return this;
-    // return ++this.size;
+    return ++this.size;
   }
 
   // DEQUEUE PSEUDOCODE

@@ -106,7 +106,7 @@ class Stack {
       this.first = newNode;
       newNode.next = firstNode;
     }
-    return this.size++;
+    return ++this.size;
   }
 
   // POP: O(1)

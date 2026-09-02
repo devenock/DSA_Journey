@@ -35,6 +35,21 @@
 // isEmpty: Returns true if the queue is empty, otherwise false.
 // isFull: Returns true if the queue is full, otherwise false.
 
+// Applications, Advantages and Disadvantages of Queue(FIFO)
+// 1. Network: Used in devices such as router or a switch. Another application is a mail queue which is a directory that stores
+// data and controls files for mail messages.
+// 2. Job Scheduling: The computer has a task to execute a particular number of jobs that are scheduled to be executed
+// one for another.e.g printers manage multiple documents in a queue.
+// 3. Shared resources: Queues are used as a waiting list for a singlr shared resource.
+// 4. CPU Scheduling: Tasks are queued and executed one after another
+
+// Real-time application of Queue
+// 1. Working as a buffer btw a slow and a fast device. e.g keyboard and CPU, and two devices on network.
+// 2. ATM Booth line
+// 3. Ticket Counter Line
+// 4. CPU task scheduling
+// 5. Waiting time of each customer at call centers
+
 // QUEUE OPERATIONS
 class Node {
   constructor(value) {

@@ -6,7 +6,7 @@
 // BSTs are widely used in database indexing, symbol tables, range queries, and are foundational for advanced structures like AVL tree and Red-Black tree.
 // In problem solving, BST are used in problems where we need to maintain sorted stream of data.
 // Operations like search, insertion and deletion work in O(log n) time for a balanced binary search tree.
-// In the worst case , these downgrade to O(n). With self-balancing BSTs like AVLand Red-Black Trees, we can ensure the worst case as O(log n)
+// In the worst case , these downgrade to O(n). With self-balancing BSTs like AVL and Red-Black Trees, we can ensure the worst case as O(log n)
 
 // Key Properties
 // 1. Unique ordering of elements means duplicates are ususally not allowed.
@@ -45,6 +45,101 @@ class BinarySearchTree {
   constructor() {
     this.root = null;
   }
+
+  // Inserting a node: O(log n) / worst case: O(n)
+  // PSEUDOCODE
+  // 1. Create a new node
+  // 2. Starting at the root
+  // - Check if there is a root, if not, the root now becomes that new node!
+  // - If there is a root, check if the value of the new node is greater than or less than the value of the root.
+  // - If it is greater
+  // - Check to see if there is anode to the right
+  // - If there is, move to that node and repeat these steps
+  // - If there is not, add that node as the right property
+  // - If it is less
+  // - Check to see if there is anode to the left
+  // - If there is, move to that node and repeat these steps
+  // - If there is not, add that node as the left property
+
+  insert(value) {
+    const newNode = new Node(value);
+    if (this.root === null) {
+      this.root = newNode;
+      return this;
+    }
+    let current = this.root;
+    while (true) {
+      if (value === current.value) {
+        return undefined;
+      }
+
+      if (value < current.value) {
+        if (current.left === null) {
+          current.left = newNode;
+          return this;
+        }
+        current = current.left;
+      } else {
+        if (current.right === null) {
+          current.right = newNode;
+          return this;
+        }
+        current = current.right;
+      }
+    }
+  }
+
+  // Searching/Finding a node: O(log n) / worst case: O(n)
+  // PSEUDOCODE(Starting at the root)
+  // 1. Check if there is a root, if not - we're done searching!
+  // 2. If there is a root, check if the value of the new node is the value we are looking for. If we found it, we're done.
+  // 3. If not, check to see if the value is greater than or less than the value if the root
+  // 4. If it is greater
+  // - Check to see if there is a node to the right
+  // - If there is, move to that node and repeat these steps
+  // - If there is not, we're done searching
+  // 5. If it is less
+  // - Check to see if there is a node to the left
+  // - If there is, move to that noode and repeat these steps
+  // - If there is not, we're done searching
+
+  search(value) {
+    if (this.root === null) {
+      return false;
+    }
+    let current = this.root;
+    let found = false;
+    while (current && !found) {
+      if (value < current.value) {
+        current = current.left;
+      } else if (current > current.value) {
+        current = current.right;
+      } else {
+        found = true;
+      }
+    }
+    if (!found) return undefined;
+    return current;
+  }
+
+  // ALTERNATIVE APPROACH(returns true or false)
+  contains(value) {
+    if (this.root === null) {
+      return false;
+    }
+    let current = this.root;
+    let found = false;
+    while (current && !found) {
+      if (value < current.value) {
+        current = current.left;
+      } else if (value > current.value) {
+        current = current.right;
+      } else {
+        return true;
+      }
+    }
+    return false;
+  }
 }
 
 // instantiate and populate the nodes
@@ -53,18 +148,3 @@ tree.root = new Node(10);
 tree.root.right = new Node(15);
 tree.root.left = new Node(5);
 tree.root.left.right = new Node(9);
-
-// Inserting a node
-// PSEUDOCODE
-// 1. Create a new node
-// 2. Starting at the root
-// - Check if there is a root, if not, the root now becomes that new node!
-// - If there is a root, check if the value of the new node is greater than or less than the value of the root.
-// - If it is greater
-// - Check to see if there is anode to the right
-// - If there is, move to that node and repeat these steps
-// - If there is not, add that node as the right property
-// - If it is less
-// - Check to see if there is anode to the left
-// - If there is, move to that node and repeat these steps
-// - If there is not, add that node as the left property

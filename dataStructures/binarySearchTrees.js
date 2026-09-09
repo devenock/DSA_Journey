@@ -57,7 +57,7 @@ class BinarySearchTree {
   // - If there is, move to that node and repeat these steps
   // - If there is not, add that node as the right property
   // - If it is less
-  // - Check to see if there is anode to the left
+  // - Check to see if there is a node to the left
   // - If there is, move to that node and repeat these steps
   // - If there is not, add that node as the left property
 

@@ -91,15 +91,20 @@ class BinarySearchTree {
     queue.push(node);
     // set condition for when the queue is not empty
     while (queue.length) {
+      // remove the node from the queue
       node = queue.shift();
+      // push the value of the removed node to the data array
       data.push(node.value);
+      // check if there is a left node and push to the queue
       if (node.left) {
         queue.push(node.left);
       }
+      // check if there is a right node and push to the queue
       if (node.right) {
         queue.push(node.right);
       }
     }
+    // return the data array
     return data;
   }
 }

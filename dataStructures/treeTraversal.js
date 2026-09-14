@@ -1,4 +1,3 @@
-// Tree Traversal(Inorder, Preorder, Postorder)
 // Tree Traversals visit every node of a binary tree in a defined order.
 // TWO CATEGORIES
 // Traversals split into breadth-first(level-order) and depth-first(inorder, preorder and postorder)
@@ -104,30 +103,20 @@ class BinarySearchTree {
   // 2. Tree serialization/deserialization for efficient storage and reconstruction.
   // 3. Solving problems like calculating the "maximum width of a tree" by processing nodes level by level.
   BFS() {
-    // get the root node
     var node = this.root;
-    // declare the data array to be returned at the end
     let data = [];
-    // declare the queue to store nodes already visited
     let queue = [];
-    // start by pushing the root node to the queue
-    queue.push(node);
-    // set condition for when the queue is not empty
+    queue.push(node.value);
     while (queue.length) {
-      // remove the node from the queue
       node = queue.shift();
-      // push the value of the removed node to the data array
       data.push(node.value);
-      // check if there is a left node and push to the queue
       if (node.left) {
         queue.push(node.left);
       }
-      // check if there is a right node and push to the queue
       if (node.right) {
         queue.push(node.right);
       }
     }
-    // return the data array
     return data;
   }
 
@@ -138,7 +127,7 @@ class BinarySearchTree {
   // - Visit the root
   // - Traverse the left subtree
   // - Traverse the right subtree
-  // Uses of Inorder Traversal
+  // Uses of Preorder Traversal
   // 1. Used to create a copy of the tree.
   // 2. Used to get prefix expression on an expression tree.
   // IMPLEMENTATION

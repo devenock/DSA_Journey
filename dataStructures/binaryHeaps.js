@@ -12,7 +12,7 @@
 
 // Binary heaps are commonly used in priority queues and heap sort algorithms because of their efficient insertion and deletion operations.
 // A Binary Heap is a complete Binary Tree and is typically represented as an array.
-// Inthis array-based representation, for any element at index i, the left child is at index 2i + 1 and the right child is at index 2i + 2. The parent of any element
+// In this array-based representation, for any element at index i, the left child is at index 2i + 1 and the right child is at index 2i + 2. The parent of any element
 // is at index (i -1)/2
 
 // Applications of Heaps
@@ -42,9 +42,6 @@ class MaxBinaryHeap {
   //        - Set the index to be the parentindex and start over!
   insert(element) {
     this.values.push(element);
-    this.bubbleUp();
-  }
-  bubbleUp() {
     let elemIndex = this.values.length - 1;
     let element = this.values[elemIndex];
     while (elemIndex > 0) {
@@ -55,5 +52,33 @@ class MaxBinaryHeap {
       this.values[elemIndex] = parent;
       elemIndex = parentIndex;
     }
+    // this.bubbleUp();
   }
+  // bubbleUp() {
+  //   let elemIndex = this.values.length - 1;
+  //   let element = this.values[elemIndex];
+  //   while (elemIndex > 0) {
+  //     let parentIndex = Math.floor((elemIndex - 1) / 2);
+  //     let parent = this.values[parentIndex];
+  //     if (element <= parent) break;
+  //     this.values[parentIndex] = element;
+  //     this.values[elemIndex] = parent;
+  //     elemIndex = parentIndex;
+  //   }
+  // }
+  //
+
+  // REMOVING FROM HEAP(extractMax)
+  // PSEUDOCODE
+  // 1. Swap the first value in the values property with the last one
+  // 2. Pop from the values property, so you can return the value at the end
+  // 3. Have the new root "sink down" to the correct spot
+  //    - Your parent index starts at 0 (the root)
+  //    - Find the index of the left child: 2 * index + 1(make sure its not out of bounds)
+  //    - Find the index of the right child: 2 * index + 2(make sure its not out of bounds)
+  //    - If the left or right child is greater than the element...swap. If both left and right children are larger, swap with the largest child.
+  //    - The child index you swapped to now becomes the new parent index.
+  //    - Keep looping and swapping until neither child is larger than the element.
+  //    - Return the old root!
+  extractMax() {}
 }

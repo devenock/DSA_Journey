@@ -80,5 +80,126 @@ class MaxBinaryHeap {
   //    - The child index you swapped to now becomes the new parent index.
   //    - Keep looping and swapping until neither child is larger than the element.
   //    - Return the old root!
-  extractMax() {}
+  extractMax() {
+    const max = this.values[0];
+    const end = this.values.pop();
+    if (this.values.length > 0) {
+      this.values[0] = end;
+      this.sinkDown();
+    }
+    return max;
+  }
+
+  sinkDown() {
+    let idx = 0;
+    const length = this.values.length;
+    const element = this.values[0];
+    while (true) {
+      let leftChildIndex = 2 * idx + 1;
+      let rightChildIndex = 2 * idx + 2;
+      let rightChild, leftChild;
+      let swap = null;
+      if (leftChildIndex < length) {
+        leftChild = this.values[leftChildIndex];
+        if (leftChild > element) {
+          swap = leftChildIndex;
+        }
+      }
+
+      if (rightChildIndex < length) {
+        rightChild = this.values[rightChildIndex];
+        if (
+          (swap === null && rightChild > element) ||
+          (swap !== null && rightChild > leftChild)
+        ) {
+          swap = rightChildIndex;
+        }
+      }
+
+      if (swap === null) break;
+      this.values[idx] = this.values[swap];
+      this.values[swap] = element;
+      idx = swap;
+    }
+  }
+}
+
+// PRIORITY QUEUE
+// PSEUDOCODE
+// 1. Write a Min Binary Heap - lower numbers means higher priority
+// 2. Each Node has a val and a priority. Use the priority to build the heap.
+// 3. Enqueue method accepts a value and a priority, makes a new node, and puts it in the right spot based off its priority.
+// 4. Dequeue method removes root element, returns it, and rearranges heap using priority.
+
+class Node {
+  constructor(val, priority) {
+    this.val = val;
+    this.priority = priority;
+  }
+}
+
+class PriorityQueue {
+  constructor() {
+    this.values = [];
+  }
+
+  // adding to priority queue
+  enqueue(val, priority) {
+    let newNode = new Node(val, priority);
+    this.values.push(newNode);
+    let elemIndex = this.values.length - 1;
+    let elem = this.values[elemIndex];
+    while (elemIndex > 0) {
+      let parentIndex = Math.floor((elemIndex - 1) / 2);
+      let parent = this.values[parentIndex];
+      if (elem.priority <= parent.priority) break;
+      this.values[elemIndex] = parent;
+      this.values[parentIndex] = elem;
+      elemIndex = parentIndex;
+    }
+  }
+
+  // removing from priority queue
+  extractMax() {
+    const max = this.values[0];
+    const end = this.values.pop();
+    if (this.values.length > 0) {
+      this.values[0] = end;
+      this.sinkDown();
+    }
+    return max;
+  }
+
+  sinkDown() {
+    let idx = 0;
+    const length = this.values.length;
+    const element = this.values[0];
+    while (true) {
+      let leftChildIndex = 2 * idx + 1;
+      let rightChildIndex = 2 * idx + 2;
+      let rightChild, leftChild;
+      let swap = null;
+      if (leftChildIndex < length) {
+        leftChild = this.values[leftChildIndex];
+        if (leftChild.priority > element.priority) {
+          swap = leftChildIndex;
+        }
+      }
+
+      if (rightChildIndex < length) {
+        rightChild = this.values[rightChildIndex];
+        if (
+          (swap === null && rightChild.priority > element.priority) ||
+          (swap !== null && rightChild.priority > leftChild.priority)
+        ) {
+          swap = rightChildIndex;
+        }
+      }
+
+      if (swap === null) break;
+      this.values[idx] = this.values[swap];
+      this.values[swap] = element;
+      idx = swap;
+    }
+  }
 }

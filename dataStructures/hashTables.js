@@ -23,9 +23,9 @@
 // 2. To enable speedy hashing and key retrieval, the hash function should be computationally efficient.
 // 3. It ought to be challenging to deduce the key from its hash value. As a result, attempts to guess the key using the hash function value are less likely to succeed.
 // 4. A hash function should be flexible enough to adjust as the data being hashed changes. For instance, the hash function needs to continue to perform properly if
-// the keys eing hashed change in size or formart.
+// the keys being hashed change in size or formart.
 
-// COLISION RESOLUTION TECHNIQUES
+// COLLISION RESOLUTION TECHNIQUES(Separate chaining and Linear probing)
 // Collision happens when two or more keys point to the same array index. Chaining, open addression and double hashing are a few techniques for resolving collisions.
 // 1. Open addressing: Collisions handled by looking for the following empty space in the table. If the first slot is already taken, the hash function is applied
 // to the sebsequent slots untill one is left empty.(double hashing, linear probing and quadratic probing)
@@ -37,18 +37,87 @@
 // 1. Hash tables are frequently used for indexing and searching massive volume of data. A search engine might use a hash table to store the web pages that it has indexed.
 // 2. Data is usually cached in memory via hash tables, enabling rapid access to frequently used information.
 // 3. Hash functions are frequently used in cryptography to create digital signatures. validate data and guarantee data integrity.
-// 4. Hash tables can be used for implementing databases indexes, enabling fast access to data based on key values.
-// hash function
-function hash(key, arrayLen) {
-  let total = 0;
-  // declare a prime number to help in calculating the hash value to reduce chances of collision
-  let WEIRD_PRIME = 31;
-  // loop through the string to get the keys
-  for (let i = 0; i < Math.min(key.length, 100); i++) {
-    // get character value
-    let char = key[i];
-    let value = char.charCodeAt(0) - 96;
-    total = (total * WEIRD_PRIME + value) % arrayLen;
+// 4. Hash tables can be used for implementing databases indexes, enabling fast access to data based on key values
+
+// HASH TABLE CLASS
+class HashTable {
+  constructor(size = 53) {
+    this.keyMap = new Array(size);
   }
-  return total;
+  // METHODS
+
+  // hash function
+  _hash(key) {
+    let total = 0;
+    // declare a prime number to help in calculating the hash value to reduce chances of collision
+    let WEIRD_PRIME = 31;
+    // loop through to get the keys
+    for (let i = 0; i < Math.min(key.length, 100); i++) {
+      // get character value
+      let char = key[i];
+      let value = char.charCodeAt(0) - 96;
+      total = (total * WEIRD_PRIME + value) % this.keyMap.length;
+    }
+    return total;
+  }
+
+  // Set
+  // PSEUDOCODE
+  // 1. Accepts a key and a value
+  // 2. Hashes the key
+  // 3. Stores the key-value pair in the hash table array via separate chaining.
+  set(key, value) {
+    let index = this._hash(key);
+    if (!this.keyMap[index]) {
+      this.keyMap[index] = [];
+    }
+    this.keyMap[index].push([key, value]);
+  }
+
+  // Get
+  // 1. Accept a key.
+  // 2. Hash the key.
+  // 3. Retrieves the key-value pair in the hash table.
+  // 4. If the key isn't found, returns undefined.
+  get(key) {
+    let index = this._hash(key);
+    if (this.keyMap[index]) {
+      for (let i = 0; i < this.keyMap[index].length; i++) {
+        if (this.keyMap[index][i][0] === key) {
+          return this.keyMap[index][i][1];
+        }
+      }
+    }
+    return undefined;
+  }
+
+  // values
+  values() {
+    let valuesArr = [];
+    for (let i = 0; i < this.keyMap.length; i++) {
+      if (this.keyMap[i]) {
+        for (let j = 0; j < this.keyMap[i].length; j++) {
+          if (!valuesArr.includes(this.keyMap[i][j][1])) {
+            valuesArr.push(this.keyMap[i][j][1]);
+          }
+        }
+      }
+    }
+    return valuesArr;
+  }
+
+  // keys
+  keys() {
+    let keysArr = [];
+    for (let i = 0; i < this.keyMap.length; i++) {
+      if (this.keyMap[i]) {
+        for (let j = 0; j < this.keyMap[i].length; j++) {
+          if (!keysArr.includes(this.keyMap[i][j][0])) {
+            keysArr.push(this.keyMap[i][j][0]);
+          }
+        }
+      }
+    }
+    return keysArr;
+  }
 }

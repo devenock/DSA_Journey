@@ -26,7 +26,6 @@
 // Each entry in the matrix represents the weight of the edge between those vertices.
 // matrix[i][j] = 1 if there is an edge between vertex i and vertex j
 // matrix[i][j] = 0 if there is no edge
-
 // 2. Adjacency List: The graph is represented as a collection of array lists. There is an array of pointer which points to the edges connected to that vertex.
 
 // Difference between Tree and Graph
@@ -58,3 +57,53 @@
 // 2. Model real-world problems: Useful for pathfinding, data clustering, network analysis and machine learning
 // 3. Represents items and relationships: Any set of items and their connections can be modeled as a graph
 // 4. Simplfifies complex data: Graphs make complex data relationships easy to visualize and understand.
+
+class Graph {
+  constructor() {
+    this.adjacencyList = {};
+  }
+
+  // add vertex
+  // PSEUDOCODE
+  // 1. Write a method called addVertex, which accepts a name of a vertex
+  // 2. It should add a key to the adjacency list with the name of the vertex and set its value to be an empty array.
+  addVertex(vertex) {
+    this.adjacencyList[vertex] = [];
+  }
+
+  // add an edge
+  // PSEUDOCODE
+  // 1. This function should accept two vertices, we call them vertex1 and vertex2.
+  // 2. The function should find in the adjacency list the key of vertex1 and push vertex2 to the array.
+  // 3. The function should find in the adjacency list the key of vertex2 and push vertex1 to the array.
+  // 4. Do not worry about error handling/ invalid vertices
+  addEdge(vertex1, vertex2) {
+    this.adjacencyList[vertex1].push(vertex2);
+    this.adjacencyList[vertex2].push(vertex1);
+  }
+
+  // remove an edge
+  // PSEUDOCODE
+  // 1. This function should accept two vertices, we'll call them vertex1 and vertex2
+  // 2. The function should reassign the key of vertex1 to be an array that does not contain vertex2
+  // 3. The function should reassign the key of vertex2 to be an array that does not contain vertex1
+  // 4. Do not worry about handling errors/invalid vertices.
+  removeEdge(v1, v2) {
+    this.adjacencyList[v1] = this.adjacencyList[v1].filter((v) => v !== v2);
+    this.adjacencyList[v2] = this.adjacencyList[v2].filter((v) => v !== v1);
+  }
+
+  // remove a vertex
+  // PSEUDOCODE
+  // 1. The function should accept a vertex to be removed
+  // 2. The function should loop as long as there are any other vertices in the adjacency List for that vertex
+  // 3. Inside of the loop, call our removeEdge function with the vertex we are removing and any values in the adjacency list for the vertex
+  // 4. Delete the key in the adjacancy list for that vertex
+  removeVertex(vertex) {
+    while (this.adjacencyList[vertex].length) {
+      const adjacentVertex = this.adjacencyList[vertex].pop();
+      this.removeEdge(vertex, adjacentVertex);
+    }
+    delete this.adjacencyList[vertex];
+  }
+}

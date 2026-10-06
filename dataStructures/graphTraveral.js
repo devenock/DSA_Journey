@@ -75,4 +75,69 @@ class Graph {
     })(start);
     return result;
   }
+
+  // DFS Iterative PSEUDOCODE
+  // 1. The function should accept a starting node.
+  // 2. Create a stack to help use keep track of vertices (use list/array)
+  // 3. Create a list to store the end result, to be returned at the very end
+  // 4. Create an object to store visited nodes
+  // 5. Add the starting vertex to the stack and mark it visited
+  // 6. While the stack has something in it:
+  //   - Pop the next vertex from the stack
+  //   - If that vertex hasn't been visited yet:
+  //        - Mark it as visited
+  //        - Add it to the result list
+  //        - Push all of its neighbors into the stack
+  //   - Return the result array
+  // SOLUTION
+  DFSIterative(vertex) {
+    const vertices = [];
+    const result = [];
+    const visited = {};
+    result.push(vertex);
+    visited[vertex] = true;
+    let currentVertex;
+    while (vertices.length > 0) {
+      currentVertex = vertices.pop();
+      result.push(currentVertex);
+      this.adjacencyList[currentVertex].forEach((neighbor) => {
+        if (!visited[neighbor]) {
+          visited[neighbor] = true;
+          vertices.push(neighbor);
+        }
+      });
+    }
+    return result;
+  }
+
+  // BFS PSEUDOCODE
+  // 1. This function should accept a starting vertex.
+  // 2. Create a queue(you can use an array) and place the starting vertex in it
+  // 3. Create an array to store the nodes visited
+  // 4. Create an object to store visited nodes
+  // 5. Mark the starting vertex as visited
+  // 6. Loop as long as there is anything in the queue
+  // 7. Remove the first vertex from the queue and push it into the array that stores nodes visited.
+  // 8. Loop over each vertex in the adjacency list for the vertex you are visiting
+  // 9. If it is not inside the object that stores nodes visited, mark it as visited and enqueue that vertex
+  // 10. Once you have finished looping, return the array of visited nodes
+  // SOLUTION
+  BreadthFirstSearch(start) {
+    const graphQueue = [start];
+    const result = [];
+    const visitedObj = {};
+    visitedObj[start] = true;
+    let currentVertex;
+    while (graphQueue.length > 0) {
+      currentVertex = graphQueue.shift();
+      result.push(currentVertex);
+      this.adjacencyList[currentVertex].forEach((neighbor) => {
+        if (!visitedObj[neighbor]) {
+          visitedObj[neighbor] = true;
+          graphQueue.push(neighbor);
+        }
+      });
+    }
+    return result;
+  }
 }

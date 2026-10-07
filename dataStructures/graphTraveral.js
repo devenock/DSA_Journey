@@ -90,12 +90,12 @@ class Graph {
   //        - Push all of its neighbors into the stack
   //   - Return the result array
   // SOLUTION
-  DFSIterative(vertex) {
+  DFSIterative(start) {
     const vertices = [];
     const result = [];
     const visited = {};
-    result.push(vertex);
-    visited[vertex] = true;
+    vertices.push(start);
+    visited[start] = true;
     let currentVertex;
     while (vertices.length > 0) {
       currentVertex = vertices.pop();

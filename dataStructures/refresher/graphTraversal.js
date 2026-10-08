@@ -30,26 +30,19 @@ class Graph {
   }
 
   // Traversals
-  // DFSRecursive(start) {
-
-  //   let result = []
-  //   let visited = {}
-  //   let currentVertex
-  // }
-
   DFSIterative(start) {
+    let stack = [start];
     let result = [];
     let visited = {};
-    let vertices = [start];
-    visited[start] = true;
     let currentVertex;
-    while (vertices.length > 0) {
-      currentVertex = vertices.pop();
+    visited[start] = true;
+    while (stack.length > 0) {
+      currentVertex = stack.pop();
       result.push(currentVertex);
       this.adjacencyList[currentVertex].forEach((neighbor) => {
         if (!visited[neighbor]) {
           visited[neighbor] = true;
-          vertices.push(neighbor);
+          stack.push(neighbor);
         }
       });
     }
@@ -57,11 +50,11 @@ class Graph {
   }
 
   BFS(start) {
+    let queue = [start];
     let result = [];
     let visited = {};
-    let queue = [start];
-    visited[start] = true;
     let currentVertex;
+    visited[start] = true;
     while (queue.length > 0) {
       currentVertex = queue.shift();
       result.push(currentVertex);

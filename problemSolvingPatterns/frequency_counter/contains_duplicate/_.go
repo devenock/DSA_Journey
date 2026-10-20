@@ -45,7 +45,7 @@ func hasDuplicate(nums []int) bool {
 func hasDuplicate(nums []int) bool {
 	// create a map
 	numsMap := make(map[int]bool)
-	// loop through the slice to update the map
+	// loop through the slice and compare the values with what we already have in the map
 	for _, num := range nums {
 		if numsMap[num] {
 			return true

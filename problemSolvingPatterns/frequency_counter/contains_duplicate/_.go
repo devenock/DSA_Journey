@@ -40,3 +40,17 @@ func hasDuplicate(nums []int) bool {
 	}
 	return false
 }
+
+// HASH SET SOLUTION: time: O(n), space: O(n)
+func hasDuplicate(nums []int) bool {
+	// create a map
+	numsMap := make(map[int]bool)
+	// loop through the slice to update the map
+	for _, num := range nums {
+		if numsMap[num] {
+			return true
+		}
+		numsMap[num] = true
+	}
+	return false
+}

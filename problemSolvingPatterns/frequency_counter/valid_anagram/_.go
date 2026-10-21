@@ -15,8 +15,8 @@ func isAnagram(s, t string) bool {
 		return false
 	}
 	// create the maps
-	sMap := make(map[rune]bool)
-	tMap := make(map[rune]bool)
+	sMap := make(map[rune]int)
+	tMap := make(map[rune]int)
 
 	// loop through the strings to update their maps
 	for _, val := range s{

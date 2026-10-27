@@ -1,0 +1,31 @@
+// Given an integer array nums and an integer k, return the k most frequent elements within the array.
+// The test cases are generated such that the answer is always unique.
+// You may return the output in any order.
+
+// Example 1:
+// Input: nums = [1,2,2,3,3,3], k = 2
+// Output: [2, 3]
+
+// Example 2:
+// Input: nums = [7,7], k = 1
+// Output: [7]
+// PSEUDOCODE
+// 1.Create a hash map to store the frequency of each number.
+// 2.Build a list of [frequency, number] pairs from the map.
+// 3.Sort this list in ascending order based on frequency.
+// 4.Create an empty result list.
+// 5.Repeatedly pop from the end of the sorted list (highest frequency) and append the number to the result.
+// 6.Stop when the result contains k elements.
+// 7.Return the result list.
+function topKFrequent(nums, k) {
+  let numHash = {};
+  for (let num of nums) {
+    numHash[num] = (numHash[num] || 0) + 1;
+  }
+  const numHashArr = Object.entries(numHash).map(([num, freq]) => [
+    freq,
+    parseInt(num),
+  ]);
+  numHashArr.sort((a, b) => b[0] - a[0]);
+  return numHashArr.slice((0, k)).map((pair) => pair[1]);
+}

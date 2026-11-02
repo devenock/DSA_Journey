@@ -36,3 +36,39 @@ func topKFrequent(nums []int, k int) []int {
 	}
 	return res
 }
+
+// SIMILLAR PROBLEM
+// Given an array of strings words and an integer k, return the k most frequent strings.
+// Return the answer sorted by the frequency from highest to lowest. Sort the words with the same frequency by their lexicographical order.
+
+// Example 1:
+// Input: words = ["i","love","leetcode","i","love","coding"], k = 2
+// Output: ["i","love"]
+// Explanation: "i" and "love" are the two most frequent words.
+// Note that "i" comes before "love" due to a lower alphabetical order.
+
+// Example 2:
+// Input: words = ["the","day","is","sunny","the","the","the","sunny","is","is"], k = 4
+// Output: ["the","is","sunny","day"]
+// Explanation: "the", "is", "sunny" and "day" are the four most frequent words, with the number of occurrence being 4, 3, 2 and 1 respectively.
+
+// SOLUTION
+func topKFrequentWords(words []string, k int) []string {
+	// create an empty hash
+	hash := make(map[string]int)
+	for _, word := range words {
+		hash[word]++
+	}
+	hashArr := make([][2]string, 0, len(hash))
+	for key, val := range hashArr {
+		hashArr.append(hashArr, [2]int{key, val})
+	}
+	sort.Slice(hashArr, func(i, j int) bool {
+		return hashArr[i][0] > hashArr[j][0]
+	})
+	res := make([]int, k)
+	for i := 0; i < k; i++ {
+		res[i] = hashArr[i][1]
+	}
+	return res
+}

@@ -11,7 +11,7 @@
 // Input: s = "tab a cat"
 // Output: false
 
-// SOLUTION
+// SOLUTION: O(n)
 func isPalindrome(s string) bool {
 	// convert to lowercase
 	lowerStr := strings.ToLower(s)

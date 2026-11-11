@@ -78,6 +78,6 @@ function threeSum(nums) {
         }
       }
     }
-    return [];
+    return res;
   }
 }

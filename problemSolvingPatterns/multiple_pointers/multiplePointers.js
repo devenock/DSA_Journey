@@ -71,24 +71,24 @@ function twoSumII(nums, target) {
 // SOLUTION
 function isPalindrome(s) {
   // first change the string to lowercase, then remove the spaces and the special x-ters from the string(trim it)
-  let newStr = s.toLowerCase().replace(/[^a-z0-9]/g,"")
+  let newStr = s.toLowerCase().replace(/[^a-z0-9]/g, "");
   // form an array from the string
-  let sArr = newStr.split("")
+  let sArr = newStr.split("");
 
   // check if length is 0 and return true because an empty string is a valid palindrome
   if (sArr.length === 0) {
     return true;
   }
   // define the pointers
-  let left = 0
-  let right = sArr.length - 1
+  let left = 0;
+  let right = sArr.length - 1;
   // set the loop
   while (left < right) {
     if (sArr[left] !== sArr[right]) {
-      return false
+      return false;
     } else {
-      left++
-      right--
+      left++;
+      right--;
     }
   }
 
@@ -116,29 +116,29 @@ function isPalindrome(s) {
 // SOLUTION
 function threeSum(nums) {
   // sort the array first
-  nums.sort((a, b) => a - b)
-  let result = []
-  // loop through the array first
-  for (let i = 0; i < nums.length; i++){
+  nums.sort((a, b) => a - b);
+  let result = [];
+  // Iterate through the array once to capture all the items.
+  for (let i = 0; i < nums.length; i++) {
     // check for a posibility
     if (nums[i] > 0) break;
     if (i > 0 && nums[i] === nums[i - 1]) continue;
     // define the pointers
-    let left = i + 1
-    let right = nums.length - 1
+    let left = i + 1;
+    let right = nums.length - 1;
     // set the loop condition
     while (left < right) {
-      let sum = nums[i] + nums[left] + nums[right]
+      let sum = nums[i] + nums[left] + nums[right];
       if (sum > 0) {
-        right--
+        right--;
       } else if (sum < 0) {
-        left++
+        left++;
       } else {
-        result.push([nums[i], nums[left], nums[right]])
-        left++
-        right--
+        result.push([nums[i], nums[left], nums[right]]);
+        left++;
+        right--;
         while (left < right && nums[left] === nums[left - right]) {
-          left++
+          left++;
         }
       }
     }
@@ -148,7 +148,8 @@ function threeSum(nums) {
 }
 
 // 4. Container With Most Water(Medium)
-// You are given an integer array height of length n. There are n vertical lines drawn such that the two endpoints of the ith line are (i, 0) and (i, height[i]).
+// You are given an integer array height of length n.
+// There are n vertical lines drawn such that the two endpoints of the ith line are (i, 0) and (i, height[i]).
 // Find two lines that together with the x-axis form a container, such that the container contains the most water.
 // Return the maximum amount of water a container can store.
 //    Example 1:
@@ -161,24 +162,24 @@ function threeSum(nums) {
 //   Input: height = [1,1]
 //   Output: 1
 // SOLUTION:
-function containerWithMostWater(height) {
+function containerWithMostWater(heights) {
   // first check the array length
-  if (height.length === 0) {
+  if (heights.length === 0) {
     return -1;
   }
   // define the pointers
-  let left = 0
-  let right = height.length - 1
-  let result = 0
+  let left = 0;
+  let right = heights.length - 1;
+  let result = 0;
   while (left < right) {
-    let width = right - left
-     let height = Math.min(height[left], height[right])
+    let width = right - left;
+    let height = Math.min(heights[left], heights[right]);
     let area = width * height;
-    result = Math.max(result, area)
+    result = Math.max(result, area);
     if (height[left] <= height[right]) {
-      left++
+      left++;
     } else {
-      right--
+      right--;
     }
   }
 
